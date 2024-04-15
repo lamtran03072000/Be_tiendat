@@ -1,4 +1,4 @@
-FROM node
+FROM node:18.19.0-alpine
 
 WORKDIR /usr/tiendat_be
 
