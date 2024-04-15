@@ -15,7 +15,11 @@ export class AppService {
       },
     });
 
+    const dataHeader = await prisma.header.findUnique({
+      where: { id: idLanguage },
+    });
     return {
+      headerPage: dataHeader,
       homePage: dataPage,
     };
   }

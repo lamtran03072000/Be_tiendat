@@ -18,6 +18,17 @@ model AboutVn {
 }
 
 model homepage {
-  id     Int  @id @default(autoincrement())
-  banner Json
+  id              Int  @id @default(autoincrement())
+  banner          Json
+  loiMoDau        Json
+  number          Json
+  sanPhamCungCap  Json
+  tuLieuHinhAnh   Json
+  linhVucUngDung  Json
+  banMuonBietThem Json
+}
+
+model header {
+  id        Int  @id @default(autoincrement())
+  titlePage Json
 }
