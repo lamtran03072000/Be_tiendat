@@ -1,0 +1,34 @@
+version: '3'
+services:
+  tiendat_be:
+    depends_on:
+      - mysql_tiendat
+    environment:
+      - DATABASE_URL=mysql://root:1901@mysql_tiendat:3306/tiendat?schema=public
+    env_file:
+      - .env
+    build: .
+    container_name: tiendat_be
+    ports:
+      - "8000:8000"
+    networks:
+      - node-network
+
+  mysql_tiendat:
+    image: mysql
+    container_name: mysql_tiendat
+    volumes:
+      - mysql_tiendat:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=1901
+    ports:
+      - "3308:3306"
+    networks:
+      - node-network
+    
+volumes:
+  mysql_tiendat:
+    driver: local
+
+networks:
+  node-network: {}
