@@ -6,6 +6,7 @@ import { PageHomeModule } from './page-home/page-home.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { HeaderPageModule } from './header-page/header-page.module';
+import { MailerModule } from './mailer/mailer.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { HeaderPageModule } from './header-page/header-page.module';
       serveRoot: '/public/', // tiền tố URL cho tệp tĩnh
     }),
     HeaderPageModule,
+    MailerModule,
   ],
   controllers: [AppController],
   providers: [AppService],

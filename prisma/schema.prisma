@@ -32,3 +32,13 @@ model header {
   id        Int  @id @default(autoincrement())
   titlePage Json
 }
+
+model mail {
+  id      Int      @id @default(autoincrement())
+  email   String?  @db.VarChar(255)
+  sdt     String?  @db.VarChar(255)
+  tieuDe  String?  @db.VarChar(255)
+  noiDung String?  @db.VarChar(255)
+  isCheck Boolean?
+  hoTen   String?  @db.VarChar(255)
+}
