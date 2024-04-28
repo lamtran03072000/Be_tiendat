@@ -23,4 +23,13 @@ export class AppService {
       homePage: dataPage,
     };
   }
+  async getContentFull() {
+    const prisma = new PrismaClient();
+
+    const dataPage = await prisma.homepage.findMany();
+    return {
+      dataPageVn: dataPage[0],
+      dataPageEn: dataPage[1],
+    };
+  }
 }

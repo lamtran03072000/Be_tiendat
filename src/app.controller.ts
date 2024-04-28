@@ -9,4 +9,9 @@ export class AppController {
   getContent(@Query('lg') lg: string) {
     return this.appService.getContent(lg);
   }
+
+  @Get('/content-full')
+  getContentFull() {
+    return this.appService.getContentFull();
+  }
 }
