@@ -9,12 +9,14 @@ import { HeaderPageModule } from './header-page/header-page.module';
 import { MailerModule } from './mailer/mailer.module';
 import { RouterModule } from '@nestjs/core';
 import { BannerModule } from './page-home/banner/banner.module';
+import { FileUploadModule } from './file-upload/file-upload.module';
 
 @Module({
   imports: [
     PageAboutModule,
     PageHomeModule,
     BannerModule,
+    FileUploadModule,
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'public'), // đường dẫn tới thư mục chứa tệp tĩnh
       serveRoot: '/public/', // tiền tố URL cho tệp tĩnh
