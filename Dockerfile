@@ -16,7 +16,6 @@ EXPOSE 8000
 
 ENV DATABASE_URL="mysql://root:1901@61.14.233.55:3308/tiendat?schema=public"
 
-ENV HOST="61.14.233.55"
 
 CMD ["yarn", "start"]
 
