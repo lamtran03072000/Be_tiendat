@@ -45,6 +45,9 @@ export class ImgUploadService {
     }
   }
   async getLinkUrl(idImg) {
+    if (!idImg) {
+      return 'no';
+    }
     try {
       const prisma = new PrismaClient();
       const dataImg = await prisma.img.findUnique({
