@@ -1,10 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
 import { translate } from '@vitalets/google-translate-api';
+import { TranslationTextService } from 'src/translation-text/translation-text.service';
 
 @Injectable()
 export class BannerService {
-  constructor() {}
+  constructor(private readonly translationService: TranslationTextService) {}
 
   async updateContentBannerVn(content) {
     const prisma = new PrismaClient();
@@ -49,21 +50,20 @@ export class BannerService {
         banner: content.dataBannerVn,
       },
     });
-    let newContentTranslateVnToEn = await translate(
-      content.dataBannerVn.content,
-      { to: 'en' },
-    );
 
-    let dataEn = {
-      ...content.dataBannerEn,
-      content: newContentTranslateVnToEn.text,
-    };
+    const databannerVnJson = JSON.stringify(content.dataBannerVn);
+    const dataEn = await this.translationService.translateWithProxies(
+      databannerVnJson,
+      'en',
+    );
+    const newDataEn = JSON.parse(dataEn);
+
     const dataHomePageEn: any = await prisma.homepage.update({
       where: {
         id: 2,
       },
       data: {
-        banner: dataEn,
+        banner: newDataEn,
       },
     });
     return 'thành công update banner tiếng anh và tiếng việt';

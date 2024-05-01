@@ -10,6 +10,8 @@ import { MailerModule } from './mailer/mailer.module';
 import { RouterModule } from '@nestjs/core';
 import { BannerModule } from './page-home/banner/banner.module';
 import { ImgUploadModule } from './img-upload/img-upload.module';
+import { LoiMoDauModule } from './page-home/loi-mo-dau/loi-mo-dau.module';
+import { TranslationTextModule } from './translation-text/translation-text.module';
 
 @Module({
   imports: [
@@ -31,10 +33,15 @@ import { ImgUploadModule } from './img-upload/img-upload.module';
             path: 'page-home',
             module: BannerModule,
           },
+          {
+            path: 'page-home',
+            module: LoiMoDauModule,
+          },
         ],
       },
     ]),
     ImgUploadModule,
+    TranslationTextModule,
   ],
   controllers: [AppController],
   providers: [AppService],
