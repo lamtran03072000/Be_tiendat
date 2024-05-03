@@ -12,12 +12,16 @@ import { BannerModule } from './page-home/banner/banner.module';
 import { ImgUploadModule } from './img-upload/img-upload.module';
 import { LoiMoDauModule } from './page-home/loi-mo-dau/loi-mo-dau.module';
 import { TranslationTextModule } from './translation-text/translation-text.module';
+import { BannerTdModule } from './tuyen-dung/banner-td/banner-td.module';
+import { TaiSaoLamViecModule } from './tuyen-dung/tai-sao-lam-viec/tai-sao-lam-viec.module';
 
 @Module({
   imports: [
     PageAboutModule,
     PageHomeModule,
     BannerModule,
+    BannerTdModule,
+    TaiSaoLamViecModule,
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', '..', 'img-tiendat'), // đường dẫn tới thư mục chứa tệp tĩnh
       serveRoot: '/img-tiendat', // tiền tố URL cho tệp tĩnh
@@ -36,6 +40,19 @@ import { TranslationTextModule } from './translation-text/translation-text.modul
           {
             path: 'page-home',
             module: LoiMoDauModule,
+          },
+        ],
+      },
+      {
+        path: '',
+        children: [
+          {
+            path: 'tuyen-dung',
+            module: BannerTdModule,
+          },
+          {
+            path: 'tuyen-dung',
+            module: TaiSaoLamViecModule,
           },
         ],
       },

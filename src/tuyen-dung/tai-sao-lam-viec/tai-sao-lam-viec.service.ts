@@ -1,89 +1,89 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
 import { TranslationTextService } from 'src/translation-text/translation-text.service';
-
 @Injectable()
-export class LoiMoDauService {
-  constructor(private readonly translationService: TranslationTextService) {} // Inject TranslationService
+export class TaiSaoLamViecService {
+  constructor(private readonly translationService: TranslationTextService) {}
 
-  async updateContentLMDVn(content) {
+  async updateContentTSLVTdVn(content) {
     const prisma = new PrismaClient();
-    const dataHomePageVn: any = await prisma.homepage.update({
+    const dataTdVn: any = await prisma.tuyenDung.update({
       where: {
         id: 1,
       },
       data: {
-        loiMoDau: content.dataLoiMoDauVn,
+        taiSaoLamViec: content.dataTSLVTdVn,
       },
     });
-    const dataHomePageEn: any = await prisma.homepage.update({
+    const dataTdEn: any = await prisma.tuyenDung.update({
       where: {
         id: 2,
       },
       data: {
-        loiMoDau: content.dataLoiMoDauEn,
+        taiSaoLamViec: content.dataTSLVTdEn,
       },
     });
 
     return 'thành công update ';
   }
-  async updateContentLMDEn(content) {
+  async updateContentTSLVTdEn(content) {
     const prisma = new PrismaClient();
-    const dataHomePageEn: any = await prisma.homepage.update({
+    const dataTdEn: any = await prisma.tuyenDung.update({
       where: {
         id: 2,
       },
       data: {
-        loiMoDau: content.dataLoiMoDauEn,
+        taiSaoLamViec: content.dataTSLVTdEn,
       },
     });
     return 'thành công update banner tiếng anh';
   }
-  async updateContentLMDFull(content) {
+  async updateContentTSLVTdFull(content) {
     try {
       const prisma = new PrismaClient();
-      const dataHomePageVn: any = await prisma.homepage.update({
+      const dataTdVn: any = await prisma.tuyenDung.update({
         where: {
           id: 1,
         },
         data: {
-          loiMoDau: content.dataLoiMoDauVn,
+          taiSaoLamViec: content.dataTSLVTdVn,
         },
       });
-      const dataLoiMoDauVnJson = JSON.stringify(content.dataLoiMoDauVn);
+      const dataTSLVTdVnJson = JSON.stringify(content.dataTSLVTdVn);
+
       const dataEn = await this.translationService.translateWithProxies(
-        dataLoiMoDauVnJson,
+        dataTSLVTdVnJson,
         'en',
       );
       const newDataEn = JSON.parse(dataEn);
-      const dataHomePageEn: any = await prisma.homepage.update({
+
+      const dataTdEn: any = await prisma.tuyenDung.update({
         where: {
           id: 2,
         },
         data: {
-          loiMoDau: newDataEn,
+          taiSaoLamViec: newDataEn,
         },
       });
 
       return 'thành công update banner tiếng anh và tiếng việt';
     } catch (error) {
-      console.log('error: ', error);
       if (error.message == 'All proxies failed') {
         return 'Dịch thất bại';
       }
     }
   }
 
-  async updateContentLMD(infoUpdate: any, lg) {
+  async updateContentTSLVTd(infoUpdate: any, lg) {
     const prisma = new PrismaClient();
     let status = '';
 
     if (lg == 'vn') {
-      status = await this.updateContentLMDVn(infoUpdate.content);
+      status = await this.updateContentTSLVTdVn(infoUpdate.content);
     } else if (lg == 'en') {
-      status = await this.updateContentLMDEn(infoUpdate.content);
+      status = await this.updateContentTSLVTdEn(infoUpdate.content);
     } else if (lg == 'full') {
-      status = await this.updateContentLMDFull(infoUpdate.content);
+      status = await this.updateContentTSLVTdFull(infoUpdate.content);
     }
 
     return status;
