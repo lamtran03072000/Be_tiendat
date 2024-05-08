@@ -49,20 +49,18 @@ export class TaiSaoLamViecService {
           taiSaoLamViec: content.dataTSLVTdVn,
         },
       });
-      const dataTSLVTdVnJson = JSON.stringify(content.dataTSLVTdVn);
 
       const dataEn = await this.translationService.translateWithProxies(
-        dataTSLVTdVnJson,
+        content.dataTSLVTdVn,
         'en',
       );
-      const newDataEn = JSON.parse(dataEn);
 
       const dataTdEn: any = await prisma.tuyenDung.update({
         where: {
           id: 2,
         },
         data: {
-          taiSaoLamViec: newDataEn,
+          taiSaoLamViec: dataEn,
         },
       });
 

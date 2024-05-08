@@ -46,9 +46,9 @@ export class PageHomeController {
   findAll(@Query('lg') lg: string) {
     return this.pageHomeService.findAll(lg);
   }
-  @Post('/translate')
-  find() {
-    console.log('yes');
-    return this.pageHomeService.find();
-  }
+  // @Post('/translate')
+  // find() {
+  //   console.log('yes');
+  //   return this.pageHomeService.find();
+  // }
 }

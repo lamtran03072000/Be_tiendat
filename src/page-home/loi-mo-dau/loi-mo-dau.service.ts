@@ -50,18 +50,16 @@ export class LoiMoDauService {
           loiMoDau: content.dataLoiMoDauVn,
         },
       });
-      const dataLoiMoDauVnJson = JSON.stringify(content.dataLoiMoDauVn);
       const dataEn = await this.translationService.translateWithProxies(
-        dataLoiMoDauVnJson,
+        content.dataLoiMoDauVn,
         'en',
       );
-      const newDataEn = JSON.parse(dataEn);
       const dataHomePageEn: any = await prisma.homepage.update({
         where: {
           id: 2,
         },
         data: {
-          loiMoDau: newDataEn,
+          loiMoDau: dataEn,
         },
       });
 

@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
-import { translate } from '@vitalets/google-translate-api';
+// import { translate } from '@vitalets/google-translate-api';
 import { TranslationTextService } from 'src/translation-text/translation-text.service';
 
 @Injectable()
@@ -51,19 +51,17 @@ export class BannerService {
       },
     });
 
-    const databannerVnJson = JSON.stringify(content.dataBannerVn);
     const dataEn = await this.translationService.translateWithProxies(
-      databannerVnJson,
+      content.dataBannerVn,
       'en',
     );
-    const newDataEn = JSON.parse(dataEn);
 
     const dataHomePageEn: any = await prisma.homepage.update({
       where: {
         id: 2,
       },
       data: {
-        banner: newDataEn,
+        banner: dataEn,
       },
     });
     return 'thành công update banner tiếng anh và tiếng việt';

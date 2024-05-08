@@ -49,22 +49,18 @@ export class BannerTdService {
           banner: content.dataBannerTdVn,
         },
       });
-      const dataBannerTdVnJson = JSON.stringify(content.dataBannerTdVn);
-      console.log('dataBannerTdVnJson: ', dataBannerTdVnJson);
 
       const dataEn = await this.translationService.translateWithProxies(
-        dataBannerTdVnJson,
+        content.dataBannerTdVn,
         'en',
       );
-      const newDataEn = JSON.parse(dataEn);
-      console.log('dataEn: ', newDataEn);
 
       const dataHomePageEn: any = await prisma.tuyenDung.update({
         where: {
           id: 2,
         },
         data: {
-          banner: newDataEn,
+          banner: dataEn,
         },
       });
 
@@ -77,8 +73,6 @@ export class BannerTdService {
   }
 
   async updateContentBannerTd(infoUpdate: any, lg) {
-    console.log('lg: ', lg);
-    console.log('infoUpdate: ', infoUpdate);
     const prisma = new PrismaClient();
     let status = '';
 

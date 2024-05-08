@@ -1,4 +1,4 @@
-import { Controller, Body, Put, Query } from '@nestjs/common';
+import { Controller, Body, Put, Query, Post } from '@nestjs/common';
 import { TaiSaoLamViecService } from './tai-sao-lam-viec.service';
 
 @Controller('tai-sao-lam-viec')
