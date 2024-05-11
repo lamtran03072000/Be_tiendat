@@ -4,7 +4,7 @@ import * as fs from 'fs';
 import { join } from 'path';
 
 // const HOST = '61.14.233.55:8000';
-const HOST = 'https://be.lamtran.click';
+const HOST = 'https://be.daitiendat.vn';
 // const HOST = 'http://localhost:8000';
 @Injectable()
 export class ImgUploadService {

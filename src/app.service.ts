@@ -8,6 +8,7 @@ export class AppService {
     if (lg == 'en') {
       idLanguage = 2;
     }
+
     const prisma = new PrismaClient();
     const dataHomePage = await prisma.homepage.findUnique({
       where: {
@@ -34,11 +35,17 @@ export class AppService {
 
     const dataPage = await prisma.homepage.findMany();
     const dataTuyenDung = await prisma.tuyenDung.findMany();
+    const dataSanPham = await prisma.danhSachSanPham.findMany({
+      include: {
+        sanPham: true,
+      },
+    });
     return {
       dataPageVn: dataPage[0],
       dataPageEn: dataPage[1],
       dataTuyenDungVn: dataTuyenDung[0],
       dataTuyenDungEn: dataTuyenDung[1],
+      dataSanPham: dataSanPham,
     };
   }
 }

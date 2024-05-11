@@ -54,3 +54,27 @@ model tuyenDung {
   taiSaoLamViec     Json
   cacViTriTuyenDung Json
 }
+
+model danhSachSanPham {
+  id      Int       @id @default(autoincrement())
+  nameVn  String?   @db.VarChar(255)
+  nameEn  String?   @db.VarChar(255)
+  img     String?   @db.VarChar(255)
+  sanPham sanPham[]
+}
+
+model sanPham {
+  id              Int              @id @default(autoincrement())
+  idDanhSach      Int?
+  nameEn          String?          @db.VarChar(255)
+  infoEn          Json?
+  desEn           Json?
+  desVn           Json?
+  infoVn          Json?
+  imgExtra        Json?
+  imgMain         Int?
+  nameVn          String?          @db.VarChar(255)
+  danhSachSanPham danhSachSanPham? @relation(fields: [idDanhSach], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "sanPham_ibfk_1")
+
+  @@index([idDanhSach], map: "idDanhSach")
+}
