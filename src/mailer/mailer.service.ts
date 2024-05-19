@@ -54,7 +54,6 @@ export class MailerService {
           isCheck: true,
         },
       });
-      console.log('data: ', data);
       return 'thành công';
     } catch (error) {}
     return `This action removes a #${id} mailer`;

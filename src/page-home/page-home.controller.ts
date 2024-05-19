@@ -1,11 +1,4 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Query,
-  UseInterceptors,
-  UploadedFile,
-} from '@nestjs/common';
+import { Controller, Query, Put, Body, Post, Delete } from '@nestjs/common';
 import { PageHomeService } from './page-home.service';
 
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -15,40 +8,22 @@ import { diskStorage } from 'multer';
 export class PageHomeController {
   constructor(private readonly pageHomeService: PageHomeService) {}
 
-  @Post('/upload-img')
-  @UseInterceptors(
-    FileInterceptor('img', {
-      storage: diskStorage({
-        destination: process.cwd() + '/public/img/home-page',
-        filename: (req, file, cb) =>
-          cb(null, new Date().getTime() + '_' + file.originalname),
-      }),
-    }),
-  )
-  uploadImg(
-    @UploadedFile() file: Express.Multer.File,
-    @Query('secion') secion: string,
-    @Query('lg') lg: string,
-  ) {
-    //  xoá hình
-    // fs.unlinkSync(process.cwd() + '/public/img/' + file.filename);),
-    //   (err) => {
-    //     console.log(err);
-    //   };
-
-    if (secion === 'banner') {
-      this.pageHomeService.upLoadImgBanner(lg, file.filename);
-    }
-    return 'thành công';
+  @Put('/number')
+  updateNumber(@Body() dataNumber, @Query('lg') lg) {
+    return this.pageHomeService.updateNumber(lg, dataNumber);
+  }
+  @Put('/linh-vuc-ung-dung')
+  updateLVUD(@Body() dataLVUD, @Query('lg') lg) {
+    return this.pageHomeService.updateLVUD(lg, dataLVUD);
   }
 
-  @Get()
-  findAll(@Query('lg') lg: string) {
-    return this.pageHomeService.findAll(lg);
+  @Post('/thu-vien-hinh-anh')
+  createTVHA(@Query('idImg') idImg) {
+    return this.pageHomeService.createTVHA(idImg);
   }
-  // @Post('/translate')
-  // find() {
-  //   console.log('yes');
-  //   return this.pageHomeService.find();
-  // }
+
+  @Delete('/thu-vien-hinh-anh')
+  deleteTVHA(@Query('idImg') idImg) {
+    return this.pageHomeService.deleteTVHA(idImg);
+  }
 }

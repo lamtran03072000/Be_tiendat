@@ -56,11 +56,12 @@ model tuyenDung {
 }
 
 model danhSachSanPham {
-  id      Int       @id @default(autoincrement())
-  nameVn  String?   @db.VarChar(255)
-  nameEn  String?   @db.VarChar(255)
-  img     String?   @db.VarChar(255)
-  sanPham sanPham[]
+  id       Int       @id @default(autoincrement())
+  nameVn   String?   @db.VarChar(255)
+  nameEn   String?   @db.VarChar(255)
+  isHidden Boolean?
+  img      String?   @db.VarChar(255)
+  sanPham  sanPham[]
 }
 
 model sanPham {
@@ -77,4 +78,11 @@ model sanPham {
   danhSachSanPham danhSachSanPham? @relation(fields: [idDanhSach], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "sanPham_ibfk_1")
 
   @@index([idDanhSach], map: "idDanhSach")
+}
+
+model lienHe {
+  id                 Int   @id @default(autoincrement())
+  lienHe             Json
+  banner             Json
+  chinhSachThanhToan Json?
 }

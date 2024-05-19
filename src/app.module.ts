@@ -16,6 +16,7 @@ import { BannerTdModule } from './tuyen-dung/banner-td/banner-td.module';
 import { TaiSaoLamViecModule } from './tuyen-dung/tai-sao-lam-viec/tai-sao-lam-viec.module';
 import { CacViTriModule } from './tuyen-dung/cac-vi-tri/cac-vi-tri.module';
 import { SanPhamModule } from './san-pham/san-pham.module';
+import { LienHeModule } from './lien-he/lien-he.module';
 
 @Module({
   imports: [
@@ -67,6 +68,7 @@ import { SanPhamModule } from './san-pham/san-pham.module';
     ImgUploadModule,
     TranslationTextModule,
     SanPhamModule,
+    LienHeModule,
   ],
   controllers: [AppController],
   providers: [AppService],
