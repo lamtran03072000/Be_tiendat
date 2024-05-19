@@ -34,6 +34,9 @@ export class AppService {
       include: {
         sanPham: true,
       },
+      where: {
+        isHidden: true,
+      },
     });
     return {
       headerPage: dataHeader,
