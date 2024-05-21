@@ -6,6 +6,23 @@ import { TranslationTextService } from 'src/translation-text/translation-text.se
 export class LienHeService {
   constructor(private readonly translationService: TranslationTextService) {}
 
+  async updateZalo(sdt) {
+    try {
+      const prisma = new PrismaClient();
+      await prisma.thongTin.update({
+        where: {
+          id: 1,
+        },
+        data: {
+          sdt: sdt,
+        },
+      });
+      return 'thay đổi số điện thoại zalo thành công';
+    } catch (error) {
+      console.log('error: ', error);
+    }
+  }
+
   async updateChinhSach(data, lg) {
     try {
       const prisma = new PrismaClient();

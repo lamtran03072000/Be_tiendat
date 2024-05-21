@@ -6,6 +6,8 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
+  Put,
 } from '@nestjs/common';
 import { PageAboutService } from './page-about.service';
 
@@ -13,18 +15,19 @@ import { PageAboutService } from './page-about.service';
 export class PageAboutController {
   constructor(private readonly pageAboutService: PageAboutService) {}
 
-  @Get()
-  findAll() {
-    return this.pageAboutService.findAll();
+  @Put('banner')
+  updateBanner(@Body() data, @Query('lg') lg) {
+    console.log('yes');
+    return this.pageAboutService.updateBanner(data, lg);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.pageAboutService.findOne(+id);
+  @Put('des')
+  updateDes(@Body() data, @Query('lg') lg) {
+    return this.pageAboutService.updateDes(lg, data);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.pageAboutService.remove(+id);
+  @Put('/core-value')
+  updateCoreValue(@Body() data, @Query('lg') lg) {
+    return this.pageAboutService.updateCoreValue(lg, data);
   }
 }

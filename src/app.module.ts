@@ -17,6 +17,7 @@ import { TaiSaoLamViecModule } from './tuyen-dung/tai-sao-lam-viec/tai-sao-lam-v
 import { CacViTriModule } from './tuyen-dung/cac-vi-tri/cac-vi-tri.module';
 import { SanPhamModule } from './san-pham/san-pham.module';
 import { LienHeModule } from './lien-he/lien-he.module';
+import { GiaTriModule } from './tuyen-dung/gia-tri/gia-tri.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { LienHeModule } from './lien-he/lien-he.module';
     BannerTdModule,
     TaiSaoLamViecModule,
     CacViTriModule,
+    GiaTriModule,
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', '..', 'img-tiendat'), // đường dẫn tới thư mục chứa tệp tĩnh
       serveRoot: '/img-tiendat', // tiền tố URL cho tệp tĩnh
@@ -61,6 +63,10 @@ import { LienHeModule } from './lien-he/lien-he.module';
           {
             path: 'tuyen-dung',
             module: CacViTriModule,
+          },
+          {
+            path: 'tuyen-dung',
+            module: GiaTriModule,
           },
         ],
       },

@@ -1,4 +1,5 @@
 import {
+  Body,
   Controller,
   Get,
   Post,
@@ -20,5 +21,10 @@ export class AppController {
   @Get('/content-full')
   getContentFull() {
     return this.appService.getContentFull();
+  }
+
+  @Post('/login')
+  postLogin(@Body() user) {
+    return this.appService.login(user);
   }
 }

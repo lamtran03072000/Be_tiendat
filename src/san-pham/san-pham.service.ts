@@ -6,6 +6,56 @@ import { TranslationTextService } from 'src/translation-text/translation-text.se
 export class SanPhamService {
   constructor(private readonly translationService: TranslationTextService) {}
 
+  async updateBanner(data, lg) {
+    try {
+      const prisma = new PrismaClient();
+      if (lg == 'vn') {
+        await prisma.pageSanPham.update({
+          where: {
+            id: 1,
+          },
+          data: {
+            banner: data.dataVn,
+          },
+        });
+        await prisma.pageSanPham.update({
+          where: {
+            id: 2,
+          },
+          data: {
+            banner: data.dataEn,
+          },
+        });
+        return 'thành công update content';
+      } else if (lg == 'full') {
+        const dataVnToEn = await this.translationService.translateWithProxies(
+          data.dataVn,
+          'en',
+        );
+
+        await prisma.pageSanPham.update({
+          where: {
+            id: 1,
+          },
+          data: {
+            banner: data.dataVn,
+          },
+        });
+        await prisma.pageSanPham.update({
+          where: {
+            id: 2,
+          },
+          data: {
+            banner: dataVnToEn,
+          },
+        });
+        return 'Thành công update content Tiếng Việt và Tiếng Anh';
+      }
+    } catch (error) {
+      console.log('error: ', error);
+    }
+  }
+
   async deleteSp(id) {
     try {
       const prisma = new PrismaClient();

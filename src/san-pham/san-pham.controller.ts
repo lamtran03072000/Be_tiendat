@@ -54,4 +54,10 @@ export class SanPhamController {
   updateSp(@Query('idSp') idSp, @Query('lg') lg, @Body() dataSp) {
     return this.sanPhamService.updateSp(idSp, lg, dataSp);
   }
+
+  @Put('banner')
+  updateBanner(@Body() data, @Query('lg') lg) {
+    console.log('yes');
+    return this.sanPhamService.updateBanner(data, lg);
+  }
 }

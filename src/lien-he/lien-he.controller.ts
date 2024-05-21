@@ -27,4 +27,9 @@ export class LienHeController {
   updateChinhSach(@Body() data, @Query('lg') lg) {
     return this.lienHeService.updateChinhSach(data, lg);
   }
+
+  @Put('zalo')
+  updateZalo(@Query('sdt') sdt) {
+    return this.lienHeService.updateZalo(sdt);
+  }
 }

@@ -29,6 +29,9 @@ export class AppService {
     const dataLienHe = await prisma.lienHe.findUnique({
       where: { id: idLanguage },
     });
+    const dataAbout = await prisma.veChungToi.findUnique({
+      where: { id: idLanguage },
+    });
 
     const dataDssp = await prisma.danhSachSanPham.findMany({
       include: {
@@ -38,12 +41,22 @@ export class AppService {
         isHidden: true,
       },
     });
+
+    const dataPageSanPham = await prisma.pageSanPham.findUnique({
+      where: { id: idLanguage },
+    });
+    const dataThongTinThem = await prisma.thongTin.findUnique({
+      where: { id: 1 },
+    });
     return {
       headerPage: dataHeader,
       homePage: dataHomePage,
       tuyenDung: dataTuyenDung,
       dssp: dataDssp,
       lienHe: dataLienHe,
+      about: dataAbout,
+      pageSanPham: dataPageSanPham,
+      dataThongTinThem,
     };
   }
   async getContentFull() {
@@ -52,6 +65,11 @@ export class AppService {
     const dataPage = await prisma.homepage.findMany();
     const dataTuyenDung = await prisma.tuyenDung.findMany();
     const dataLienHe = await prisma.lienHe.findMany();
+    const dataAbout = await prisma.veChungToi.findMany();
+    const dataPageSanPham = await prisma.pageSanPham.findMany();
+    const dataThongTinThem = await prisma.thongTin.findUnique({
+      where: { id: 1 },
+    });
     const dataSanPham = await prisma.danhSachSanPham.findMany({
       where: {
         isHidden: true,
@@ -60,6 +78,7 @@ export class AppService {
         sanPham: true,
       },
     });
+
     return {
       dataPageVn: dataPage[0],
       dataPageEn: dataPage[1],
@@ -68,6 +87,35 @@ export class AppService {
       dataLienHeEn: dataLienHe[1],
       dataLienHeVn: dataLienHe[0],
       dataSanPham: dataSanPham,
+      dataAboutVn: dataAbout[0],
+      dataAboutEn: dataAbout[1],
+      dataPageSanPhamEn: dataPageSanPham[1],
+      dataPageSanPhamVn: dataPageSanPham[0],
+      dataThongTinThem,
     };
+  }
+
+  async login(userData) {
+    try {
+      const prisma = new PrismaClient();
+
+      let user = await prisma.user.findFirst({
+        where: {
+          taiKhoan: String(userData.taiKhoan),
+        },
+      });
+
+      if (user.matKhau == userData.matKhau) {
+        return {
+          privateLogin: 'tienDatSuccess',
+        };
+      } else {
+        return {
+          privateLogin: 'tienDatFail',
+        };
+      }
+    } catch (error) {
+      console.log('error: ', error);
+    }
   }
 }

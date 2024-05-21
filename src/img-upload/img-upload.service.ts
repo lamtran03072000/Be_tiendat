@@ -9,9 +9,9 @@ const HOST = 'https://be.daitiendat.vn';
 @Injectable()
 export class ImgUploadService {
   async updateImg(file, idPreImg) {
-    try {
-      const prisma = new PrismaClient();
+    const prisma = new PrismaClient();
 
+    try {
       const dataFind = await prisma.img.findUnique({
         where: {
           id: Number(idPreImg),
@@ -28,8 +28,13 @@ export class ImgUploadService {
 
         await fs.unlinkSync(filePath);
       }
+    } catch (error) {
+      console.log('error: ', error);
+    }
 
+    try {
       // tạo hình mới
+
       const data = await prisma.img.create({
         data: {
           img: file.filename,
@@ -41,24 +46,26 @@ export class ImgUploadService {
         idImg: data.id,
       };
     } catch (error) {
-      console.log('error: ', error);
+      console.log('error:ádasdsa ', error);
     }
   }
   async getLinkUrl(idImg) {
-    if (!idImg) {
-      return 'no';
-    }
     try {
-      const prisma = new PrismaClient();
-      const dataImg = await prisma.img.findUnique({
-        where: {
-          id: Number(idImg),
-        },
-      });
-      const linkUrl = HOST + '/img-tiendat/' + dataImg.img;
-      return {
-        img: linkUrl,
-      };
-    } catch (error) {}
+      if (idImg !== 'undefined') {
+        const prisma = new PrismaClient();
+        const dataImg = await prisma.img.findUnique({
+          where: {
+            id: Number(idImg),
+          },
+        });
+
+        const linkUrl = HOST + '/img-tiendat/' + dataImg.img;
+        return {
+          img: linkUrl,
+        };
+      }
+    } catch (error) {
+      console.log('error:sadasd ', error);
+    }
   }
 }
