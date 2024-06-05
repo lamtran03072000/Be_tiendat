@@ -57,7 +57,6 @@ export class SanPhamController {
 
   @Put('banner')
   updateBanner(@Body() data, @Query('lg') lg) {
-    console.log('yes');
     return this.sanPhamService.updateBanner(data, lg);
   }
 }

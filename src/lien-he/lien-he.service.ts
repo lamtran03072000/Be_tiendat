@@ -120,7 +120,6 @@ export class LienHeService {
           data.dataVn,
           'en',
         );
-        console.log('dataVnToEn: ', dataVnToEn);
 
         await prisma.lienHe.update({
           where: {

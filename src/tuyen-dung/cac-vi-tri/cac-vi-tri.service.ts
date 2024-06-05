@@ -245,6 +245,7 @@ export class CacViTriService {
         chiTiet: chiTietEn,
         soLuong: soLuongEn,
         tenViTri: tenViTriEn,
+        hinhAnh: content.viTriVn.hinhAnh,
       };
       cacViTriEn[indexEn] = contentTranslateEn;
 

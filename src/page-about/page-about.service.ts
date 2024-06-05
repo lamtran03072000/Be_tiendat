@@ -135,7 +135,6 @@ export class PageAboutService {
   }
 
   async updateBanner(data, lg) {
-    console.log('no');
     try {
       const prisma = new PrismaClient();
       if (lg == 'vn') {
