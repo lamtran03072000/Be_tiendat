@@ -94,7 +94,6 @@ export class SanPhamService {
           infoEn: infoToEn,
           desVn: dataSp.des,
           desEn: desToEn,
-          imgMain: dataSp.imgMain,
           imgExtra: dataSp.imgExtra,
         },
       });
@@ -123,12 +122,10 @@ export class SanPhamService {
   }
 
   async updateSpFull(idSp, dataSp) {
-    console.log('idSp: ', idSp);
-
     try {
       const prisma = new PrismaClient();
 
-      const { imgMain, nameVn, infoVn, desVn, imgExtra } = dataSp;
+      const { nameVn, infoVn, desVn, imgExtra } = dataSp;
 
       let nameEn = await this.translationService.translateWithProxies(
         nameVn,
@@ -147,7 +144,6 @@ export class SanPhamService {
           id: Number(idSp),
         },
         data: {
-          imgMain: imgMain,
           nameEn,
           infoEn,
           desEn,
@@ -167,14 +163,13 @@ export class SanPhamService {
     try {
       const prisma = new PrismaClient();
 
-      const { imgMain, nameEn, infoEn, desEn, imgExtra } = dataSp;
+      const { nameEn, infoEn, desEn, imgExtra } = dataSp;
 
       await prisma.sanPham.update({
         where: {
           id: Number(idSp),
         },
         data: {
-          imgMain: imgMain,
           nameEn,
           infoEn,
           desEn,
@@ -191,14 +186,13 @@ export class SanPhamService {
     try {
       const prisma = new PrismaClient();
 
-      const { imgMain, nameVn, infoVn, desVn, imgExtra } = dataSp;
+      const { nameVn, infoVn, desVn, imgExtra } = dataSp;
 
       await prisma.sanPham.update({
         where: {
           id: Number(idSp),
         },
         data: {
-          imgMain: imgMain,
           nameVn: nameVn,
           infoVn,
           desVn,

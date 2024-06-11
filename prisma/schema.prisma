@@ -64,7 +64,6 @@ model sanPham {
   desVn           Json?
   infoVn          Json?
   imgExtra        Json?
-  imgMain         Int?
   nameVn          String?          @db.VarChar(255)
   danhSachSanPham danhSachSanPham? @relation(fields: [idDanhSach], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "sanPham_ibfk_1")
 
