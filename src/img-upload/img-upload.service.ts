@@ -68,4 +68,28 @@ export class ImgUploadService {
       console.log('error:sadasd ', error);
     }
   }
+
+  async updateVideos(file, urlPre) {
+    try {
+      console.log('urlPre: ', urlPre);
+      const segments = urlPre.split('/');
+      const filenamePre = segments[segments.length - 1];
+      const filePath = join(process.cwd(), '..', 'img-tiendat', filenamePre);
+      await fs.unlinkSync(filePath);
+    } catch (error) {
+      console.log('error: ', error);
+    }
+
+    try {
+      // tạo hình mới
+
+      const linkUrl = HOST + '/img-tiendat/' + file.filename;
+      // trả về id
+      return {
+        url: linkUrl,
+      };
+    } catch (error) {
+      console.log('error:ádasdsa ', error);
+    }
+  }
 }
