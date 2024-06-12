@@ -95,6 +95,7 @@ export class SanPhamService {
           desVn: dataSp.des,
           desEn: desToEn,
           imgExtra: dataSp.imgExtra,
+          imgDesArray: dataSp.imgDesArray,
         },
       });
       return 'Thêm thành công sản phẩm';
@@ -345,6 +346,55 @@ export class SanPhamService {
       }
 
       return status;
+    } catch (error) {
+      console.log('error: ', error);
+    }
+  }
+
+  async deleteImgDes(idImg, idSp) {
+    try {
+      const prisma = new PrismaClient();
+      const data = await prisma.sanPham.findUnique({
+        where: {
+          id: Number(idSp),
+        },
+      });
+      const imgDesAraay: any = data.imgDesArray;
+      let newImgDesArray = imgDesAraay.filter((item) => item != idImg);
+
+      await prisma.sanPham.update({
+        where: {
+          id: Number(idSp),
+        },
+        data: {
+          imgDesArray: newImgDesArray,
+        },
+      });
+    } catch (error) {
+      console.log('error: ', error);
+    }
+  }
+
+  async postImgDes(idImg, idSp) {
+    try {
+      const prisma = new PrismaClient();
+
+      const data = await prisma.sanPham.findUnique({
+        where: {
+          id: Number(idSp),
+        },
+      });
+      const newImgDesAraay: any = data.imgDesArray;
+      newImgDesAraay.push(Number(idImg));
+
+      await prisma.sanPham.update({
+        where: {
+          id: Number(idSp),
+        },
+        data: {
+          imgDesArray: newImgDesAraay,
+        },
+      });
     } catch (error) {
       console.log('error: ', error);
     }

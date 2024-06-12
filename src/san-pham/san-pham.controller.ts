@@ -15,6 +15,15 @@ import { SanPhamService } from './san-pham.service';
 export class SanPhamController {
   constructor(private readonly sanPhamService: SanPhamService) {}
 
+  @Post('/imgDes')
+  postImgDes(@Query('idImg') idImg, @Query('idSp') idSp) {
+    return this.sanPhamService.postImgDes(idImg, idSp);
+  }
+  @Delete('/imgDes')
+  deleteImgDes(@Query('idImg') idImg, @Query('idSp') idSp) {
+    return this.sanPhamService.deleteImgDes(idImg, idSp);
+  }
+
   @Post()
   createDssp(@Body() data) {
     return this.sanPhamService.createDssp(data);

@@ -71,7 +71,6 @@ export class ImgUploadService {
 
   async updateVideos(file, urlPre) {
     try {
-      console.log('urlPre: ', urlPre);
       const segments = urlPre.split('/');
       const filenamePre = segments[segments.length - 1];
       const filePath = join(process.cwd(), '..', 'img-tiendat', filenamePre);
