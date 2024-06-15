@@ -98,6 +98,7 @@ export class SanPhamService {
           imgDesArray: dataSp.imgDesArray,
         },
       });
+
       return 'Thêm thành công sản phẩm';
     } catch (error) {
       console.log('error: ', error);
@@ -360,7 +361,7 @@ export class SanPhamService {
         },
       });
       const imgDesAraay: any = data.imgDesArray;
-      let newImgDesArray = imgDesAraay.filter((item) => item != idImg);
+      let newImgDesArray = imgDesAraay.filter((item) => item.img != idImg);
 
       await prisma.sanPham.update({
         where: {
@@ -375,7 +376,7 @@ export class SanPhamService {
     }
   }
 
-  async postImgDes(idImg, idSp) {
+  async postImgDes(idSp, dataSp) {
     try {
       const prisma = new PrismaClient();
 
@@ -385,7 +386,7 @@ export class SanPhamService {
         },
       });
       const newImgDesAraay: any = data.imgDesArray;
-      newImgDesAraay.push(Number(idImg));
+      newImgDesAraay.push(dataSp);
 
       await prisma.sanPham.update({
         where: {
@@ -396,7 +397,38 @@ export class SanPhamService {
         },
       });
     } catch (error) {
-      console.log('error: ', error);
+      console.log('error: ádsads', error);
+    }
+  }
+  async updateImgDes(idSp, dataSp, idImg) {
+    try {
+      const prisma = new PrismaClient();
+
+      const data = await prisma.sanPham.findUnique({
+        where: {
+          id: Number(idSp),
+        },
+      });
+      const newImgDesAraay: any = data.imgDesArray;
+
+      let index = newImgDesAraay.findIndex((item) => item.img == idImg);
+      if (index != -1) {
+        newImgDesAraay[index] = dataSp;
+      }
+      console.log('newImgDesAraay: ', newImgDesAraay);
+
+      // newImgDesAraay.push(dataSp);
+
+      await prisma.sanPham.update({
+        where: {
+          id: Number(idSp),
+        },
+        data: {
+          imgDesArray: newImgDesAraay,
+        },
+      });
+    } catch (error) {
+      console.log('error: ádsads', error);
     }
   }
 }

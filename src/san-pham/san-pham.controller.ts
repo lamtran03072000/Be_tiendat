@@ -16,9 +16,15 @@ export class SanPhamController {
   constructor(private readonly sanPhamService: SanPhamService) {}
 
   @Post('/imgDes')
-  postImgDes(@Query('idImg') idImg, @Query('idSp') idSp) {
-    return this.sanPhamService.postImgDes(idImg, idSp);
+  postImgDes(@Query('idSp') idSp, @Body() data) {
+    return this.sanPhamService.postImgDes(idSp, data);
   }
+
+  @Put('/imgDes')
+  putImgDes(@Query('idImg') idImg, @Body() data, @Query('idSp') idSp) {
+    return this.sanPhamService.updateImgDes(idSp, data, idImg);
+  }
+
   @Delete('/imgDes')
   deleteImgDes(@Query('idImg') idImg, @Query('idSp') idSp) {
     return this.sanPhamService.deleteImgDes(idImg, idSp);
