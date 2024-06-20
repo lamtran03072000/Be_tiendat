@@ -86,8 +86,9 @@ model veChungToi {
 }
 
 model pageSanPham {
-  id     Int   @id @default(autoincrement())
-  banner Json?
+  id       Int   @id @default(autoincrement())
+  banner   Json?
+  quytrinh Json?
 }
 
 model thongTin {

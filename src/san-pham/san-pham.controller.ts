@@ -74,4 +74,9 @@ export class SanPhamController {
   updateBanner(@Body() data, @Query('lg') lg) {
     return this.sanPhamService.updateBanner(data, lg);
   }
+
+  @Put('quy-trinh')
+  updateQuyTrinh(@Body() data, @Query('lg') lg) {
+    return this.sanPhamService.updateQuyTrinh(data, lg);
+  }
 }

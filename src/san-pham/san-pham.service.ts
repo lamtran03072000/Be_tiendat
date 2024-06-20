@@ -55,6 +55,101 @@ export class SanPhamService {
       console.log('error: ', error);
     }
   }
+  async updateQuyTrinh(data, lg) {
+    let {
+      titleVn,
+      titleEn,
+      link1,
+      link2,
+      link3,
+      link4,
+      img1,
+      img2,
+      img3,
+      img4,
+    } = data;
+
+    const dataVn = {
+      title: titleVn,
+      link1,
+      link2,
+      link3,
+      link4,
+      img1,
+      img2,
+      img3,
+      img4,
+    };
+    const dataEn = {
+      title: titleEn,
+      link1,
+      link2,
+      link3,
+      link4,
+      img1,
+      img2,
+      img3,
+      img4,
+    };
+    try {
+      const prisma = new PrismaClient();
+      if (lg == 'vn') {
+        await prisma.pageSanPham.update({
+          where: {
+            id: 1,
+          },
+          data: {
+            quytrinh: dataVn,
+          },
+        });
+        await prisma.pageSanPham.update({
+          where: {
+            id: 2,
+          },
+          data: {
+            quytrinh: dataEn,
+          },
+        });
+        return 'thành công update content';
+      } else if (lg == 'full') {
+        const titleVnToEn = await this.translationService.translateWithProxies(
+          dataVn.title,
+          'en',
+        );
+        await prisma.pageSanPham.update({
+          where: {
+            id: 1,
+          },
+          data: {
+            quytrinh: dataVn,
+          },
+        });
+
+        await prisma.pageSanPham.update({
+          where: {
+            id: 2,
+          },
+          data: {
+            quytrinh: {
+              title: titleVnToEn,
+              link1,
+              link2,
+              link3,
+              link4,
+              img1,
+              img2,
+              img3,
+              img4,
+            },
+          },
+        });
+
+        return 'Thành công update content Tiếng Việt và Tiếng Anh';
+      }
+    } catch (error) {
+      console.log('error: ', error);
+    }
+  }
 
   async deleteSp(id) {
     try {
