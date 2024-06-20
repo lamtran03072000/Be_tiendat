@@ -24,7 +24,8 @@ export class ImgUploadService {
             id: Number(idPreImg),
           },
         });
-        const filePath = join(process.cwd(), '..', 'img-tiendat', dataRm.img);
+        // const filePath = join(process.cwd(), '..', 'img-tiendat', dataRm.img);
+        const filePath = join('/usr/tiendat_be/img-tiendat', dataRm.img);
 
         await fs.unlinkSync(filePath);
       }
@@ -73,7 +74,7 @@ export class ImgUploadService {
     try {
       const segments = urlPre.split('/');
       const filenamePre = segments[segments.length - 1];
-      const filePath = join(process.cwd(), '..', 'img-tiendat', filenamePre);
+      const filePath = join('/usr/tiendat_be/img-tiendat', filenamePre);
       await fs.unlinkSync(filePath);
     } catch (error) {
       console.log('error: ', error);
