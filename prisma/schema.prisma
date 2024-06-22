@@ -43,6 +43,7 @@ model tuyenDung {
   banner            Json
   taiSaoLamViec     Json
   cacViTriTuyenDung Json
+  carousel          Json?
   giaTri            Json?
 }
 

@@ -11,6 +11,9 @@ import { ImgUploadService } from './img-upload.service';
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 
+// const dirmk = process.cwd() + '/../img-tiendat';
+const dirmk = '/usr/tiendat_be/img-tiendat';
+
 @Controller('img-upload')
 export class ImgUploadController {
   constructor(private readonly imgUploadService: ImgUploadService) {}
@@ -18,8 +21,8 @@ export class ImgUploadController {
   @UseInterceptors(
     FileInterceptor('file', {
       storage: diskStorage({
-        // destination: process.cwd() + '/../img-tiendat',
-        destination: '/usr/tiendat_be/img-tiendat',
+        destination: dirmk,
+        // destination: '/usr/tiendat_be/img-tiendat',
         filename: (req, file, cb) => {
           cb(null, new Date().getTime() + '_' + file.originalname);
         },
@@ -43,8 +46,8 @@ export class ImgUploadController {
     FilesInterceptor('files', 10, {
       // 'files' là tên field, 10 là số lượng file tối đa
       storage: diskStorage({
-        // destination: process.cwd() + '/../img-tiendat',
-        destination: '/usr/tiendat_be/img-tiendat',
+        destination: dirmk,
+        // destination: '/usr/tiendat_be/img-tiendat',
         filename: (req, file, cb) => {
           cb(null, new Date().getTime() + '_' + file.originalname);
         },
@@ -60,8 +63,8 @@ export class ImgUploadController {
   @UseInterceptors(
     FileInterceptor('file', {
       storage: diskStorage({
-        // destination: process.cwd() + '/../img-tiendat',
-        destination: '/usr/tiendat_be/img-tiendat',
+        destination: dirmk,
+        // destination: '/usr/tiendat_be/img-tiendat',
         filename: (req, file, cb) => {
           cb(null, `${Date.now()}_${file.originalname}`);
         },

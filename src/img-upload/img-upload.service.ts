@@ -6,6 +6,9 @@ import { join } from 'path';
 // const HOST = '61.14.233.55:8000';
 const HOST = 'https://be.daitiendat.vn';
 // const HOST = 'http://localhost:8000';
+
+// const dirmk = process.cwd() + '/../img-tiendat';
+const dirmk = '/usr/tiendat_be/img-tiendat';
 @Injectable()
 export class ImgUploadService {
   async updateImg(file, idPreImg) {
@@ -25,7 +28,7 @@ export class ImgUploadService {
           },
         });
         // const filePath = join(process.cwd(), '..', 'img-tiendat', dataRm.img);
-        const filePath = join('/usr/tiendat_be/img-tiendat', dataRm.img);
+        const filePath = join(dirmk, dataRm.img);
 
         await fs.unlinkSync(filePath);
       }
@@ -74,7 +77,7 @@ export class ImgUploadService {
     try {
       const segments = urlPre.split('/');
       const filenamePre = segments[segments.length - 1];
-      const filePath = join('/usr/tiendat_be/img-tiendat', filenamePre);
+      const filePath = join(dirmk, filenamePre);
       await fs.unlinkSync(filePath);
     } catch (error) {
       console.log('error: ', error);

@@ -19,4 +19,17 @@ export class GiaTriController {
   updateGiaTri(@Body() dataLVUD, @Query('lg') lg) {
     return this.giaTriService.updateGiaTri(lg, dataLVUD);
   }
+
+  @Post('/carousel')
+  createCarousel(@Query('idImg') idImg) {
+    return this.giaTriService.createCarousel(idImg);
+  }
+  @Delete('/carousel')
+  deleteCarousel(@Query('idImg') idImg) {
+    return this.giaTriService.deleteCarousel(idImg);
+  }
+  @Put('/carousel')
+  updateContentCarousel(@Body() payload, @Query('lg') lg) {
+    return this.giaTriService.updateContentCarousel(payload, lg);
+  }
 }

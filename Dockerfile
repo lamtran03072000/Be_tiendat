@@ -24,5 +24,5 @@ CMD ["yarn", "start"]
 
 #   cân nhắc (k lưu ảnh):  docker run -d -p 8000:8000 --name cons-tiendat-be img-tiendat-be 
 
-# docker run -d -p 8000:8000 --name cons-tiendat-be -v img-tiendat-volume:/usr/tiendat_be/img-tiendat img-tiendat-be
+# 
 
