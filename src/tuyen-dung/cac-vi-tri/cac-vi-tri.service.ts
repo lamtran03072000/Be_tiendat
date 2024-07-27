@@ -39,11 +39,11 @@ export class CacViTriService {
           chiTiet: chiTietEn,
           tenViTri: tenViTriEn,
           soLuong: soLuongEn,
+          hinhAnh: infoViTri.hinhAnh,
         },
       ];
 
       let newCvcVn = { ...cvc[0].cacViTriTuyenDung, cacViTri: newCacViTriVn };
-      // console.log('newCvcVn: ', newCvcVn);
       let newCvcEn = { ...cvc[1].cacViTriTuyenDung, cacViTri: newCacViTriEn };
       await prisma.tuyenDung.update({
         where: {

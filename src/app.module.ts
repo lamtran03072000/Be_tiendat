@@ -29,7 +29,7 @@ import { GiaTriModule } from './tuyen-dung/gia-tri/gia-tri.module';
     CacViTriModule,
     GiaTriModule,
     ServeStaticModule.forRoot({
-      // rootPath: join(__dirname, '..', '..', 'img-tiendat'), // đường dẫn tới thư mục chứa tệp tĩnh
+      // rootPath: join(__dirname, '..', '..', 'img-tiendat'), // đường dẫn tới thư mục chứa tệp tĩnh // local
       rootPath: join('/usr/tiendat_be', 'img-tiendat'), // đường dẫn tới thư mục chứa tệp tĩnh
       serveRoot: '/img-tiendat', // tiền tố URL cho tệp tĩnh
     }),

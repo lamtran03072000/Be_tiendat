@@ -11,7 +11,7 @@ import { ImgUploadService } from './img-upload.service';
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 
-// const dirmk = process.cwd() + '/../img-tiendat';
+// const dirmk = process.cwd() + '/../img-tiendat'; // local
 const dirmk = '/usr/tiendat_be/img-tiendat';
 
 @Controller('img-upload')
